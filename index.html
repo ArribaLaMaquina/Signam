@@ -421,7 +421,121 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
 .operativo-chip .label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#64748b;margin-bottom:6px}
 .operativo-chip .value{font-size:24px;font-weight:850;letter-spacing:-.03em;color:#0f172a}
 
+
+/* === Glass dashboard refresh / advanced tabs === */
+.tabs{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.44));border:1px solid rgba(255,255,255,.72);box-shadow:0 14px 40px rgba(15,23,42,.06);backdrop-filter:blur(20px) saturate(170%)}
+.tab{position:relative;overflow:hidden}
+.tab::after{content:"";position:absolute;inset:auto 18% 0;height:2px;border-radius:999px;background:transparent;transition:all .2s ease}
+.tab.active::after{background:rgba(255,255,255,.92)}
+.metric-card{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.52));border:1px solid rgba(255,255,255,.86);box-shadow:0 18px 36px rgba(15,23,42,.07), inset 0 1px 0 rgba(255,255,255,.75)}
+.metric-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 42%,rgba(37,99,235,.08));}
+.metric-card .value{font-size:38px;font-weight:800;letter-spacing:-.045em}
+.dashboard-visual-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin:16px 0 18px}
+.glass-panel{background:linear-gradient(180deg,rgba(255,255,255,.68),rgba(255,255,255,.5));border:1px solid rgba(255,255,255,.86);box-shadow:0 20px 40px rgba(15,23,42,.06), inset 0 1px 0 rgba(255,255,255,.76);backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);border-radius:28px;padding:20px;position:relative;overflow:hidden}
+.glass-panel::before{content:"";position:absolute;right:-80px;top:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.10),transparent 70%);pointer-events:none}
+.glass-title{margin:0 0 14px;font-size:16px;font-weight:800;letter-spacing:-.02em;color:#0f172a}
+.priority-stack,.ending-stack,.mini-bars{display:grid;gap:10px}
+.priority-card,.ending-card{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:20px;background:rgba(255,255,255,.58);border:1px solid rgba(148,163,184,.16)}
+.priority-card strong,.ending-card strong{display:block;font-size:14px;line-height:1.35;margin-bottom:4px}
+.priority-card span,.ending-card span{display:block;color:#64748b;font-size:12px;line-height:1.45}
+.priority-card .count,.ending-card .count{font-size:26px;font-weight:800;letter-spacing:-.04em}
+.priority-card.warning .count{color:#d97706}.priority-card.danger .count{color:#dc2626}.priority-card.info .count{color:#2563eb}.priority-card.success .count{color:#059669}
+.glass-grid-2{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px}
+.donut-wrap{display:flex;align-items:center;gap:18px;min-height:180px}
+.donut{--pct:0; width:122px;height:122px;border-radius:50%;background:conic-gradient(#2563eb calc(var(--pct)*1%), rgba(226,232,240,.8) 0);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.8),0 14px 28px rgba(37,99,235,.12)}
+.donut::before{content:"";width:86px;height:86px;border-radius:50%;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+.donut-center{position:absolute;text-align:center}
+.donut-center .big{font-size:28px;font-weight:800;letter-spacing:-.04em;color:#0f172a}
+.donut-center .small{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.progress-legend{display:grid;gap:10px;min-width:0;flex:1}
+.progress-chip{padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.58);border:1px solid rgba(148,163,184,.14)}
+.progress-chip strong{display:block;font-size:13px;margin-bottom:3px}.progress-chip span{font-size:12px;color:#64748b}
+.mini-bar{display:grid;gap:6px}.mini-bar-head{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#334155;font-weight:700}.mini-bar-track{height:10px;background:rgba(226,232,240,.88);border-radius:999px;overflow:hidden}.mini-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#2563eb,#22c1dc)}
+.mini-bar-fill.warn{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.mini-bar-fill.danger{background:linear-gradient(90deg,#ef4444,#fb7185)}
+.advanced-nav-wrap{margin-bottom:14px}
+.advanced-tabs{justify-content:flex-start}
+@media (max-width:1080px){.dashboard-visual-grid,.glass-grid-2{grid-template-columns:1fr}.donut-wrap{min-height:auto}}
+
+
+/* === Premium dashboard polish + Firestore incremental UX === */
+.dash-sync-btn{white-space:nowrap}
+.sync-mini-status{display:inline-flex;align-items:center;gap:6px;height:42px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(148,163,184,.18);font-size:12px;font-weight:700;color:#475569}
+.sync-mini-status.ok{color:#047857;background:rgba(236,253,245,.72);border-color:rgba(16,185,129,.22)}
+.sync-mini-status.warn{color:#b45309;background:rgba(255,251,235,.76);border-color:rgba(245,158,11,.22)}
+#metrics-grid{grid-template-columns:repeat(6,minmax(150px,1fr));}
+.dash-kpi{min-height:132px;display:flex;flex-direction:column;justify-content:space-between;isolation:isolate;}
+.dash-kpi .kpi-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.dash-kpi .kpi-icon{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;background:rgba(37,99,235,.10);color:#1d4ed8;font-size:20px;border:1px solid rgba(37,99,235,.12)}
+.dash-kpi .kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#64748b;line-height:1.35}
+.dash-kpi .kpi-value{font-size:36px;font-weight:850;letter-spacing:-.055em;color:#0f172a;line-height:1}
+.dash-kpi .kpi-sub{font-size:12px;color:#64748b;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-kpi.blue .kpi-icon{background:rgba(37,99,235,.11);color:#1d4ed8}.dash-kpi.green .kpi-icon{background:rgba(16,185,129,.12);color:#047857}.dash-kpi.amber .kpi-icon{background:rgba(245,158,11,.13);color:#b45309}.dash-kpi.red .kpi-icon{background:rgba(239,68,68,.12);color:#dc2626}.dash-kpi.cyan .kpi-icon{background:rgba(6,182,212,.13);color:#0891b2}
+.dashboard-visual-grid{grid-template-columns:1.15fr .85fr;align-items:stretch}
+.glass-panel{transition:transform .18s ease, box-shadow .18s ease}
+.glass-panel:hover{transform:translateY(-1px);box-shadow:0 24px 48px rgba(15,23,42,.08), inset 0 1px 0 rgba(255,255,255,.78)}
+.priority-card,.ending-card,.progress-chip{transition:background .18s ease,transform .18s ease}
+.priority-card:hover,.ending-card:hover,.progress-chip:hover{background:rgba(255,255,255,.72);transform:translateY(-1px)}
+.db-toggle{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 12px;border-radius:14px;background:rgba(255,255,255,.62);border:1px solid rgba(148,163,184,.18);font-size:12px;font-weight:700;color:#334155;cursor:pointer}
+.db-toggle input{width:15px;height:15px;accent-color:#2563eb}
+.diff-mini{display:grid;gap:3px;font-size:11px;line-height:1.35;color:#475569}
+.diff-mini b{font-weight:800;color:#0f172a}
+@media (max-width:1280px){#metrics-grid{grid-template-columns:repeat(3,minmax(160px,1fr));}}
+@media (max-width:760px){#metrics-grid{grid-template-columns:repeat(2,minmax(140px,1fr));}.dash-kpi .kpi-value{font-size:30px}}
+
+
+/* === Auth login + mandatory cloud autosync === */
+.auth-overlay{
+  position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(900px 500px at 15% 10%,rgba(37,99,235,.18),transparent 60%),
+    radial-gradient(800px 500px at 85% 15%,rgba(6,182,212,.14),transparent 60%),
+    linear-gradient(180deg,#f8fbff,#eef4fb);
+  padding:24px;
+}
+.auth-overlay.hidden{display:none!important}
+.auth-card{
+  width:min(460px,100%);border-radius:30px;padding:28px;
+  background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.56));
+  border:1px solid rgba(255,255,255,.86);
+  box-shadow:0 28px 70px rgba(15,23,42,.12), inset 0 1px 0 rgba(255,255,255,.8);
+  backdrop-filter:blur(26px) saturate(175%);-webkit-backdrop-filter:blur(26px) saturate(175%);
+}
+.auth-mark{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(37,99,235,.10);border:1px solid rgba(37,99,235,.16);color:#1d4ed8;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.auth-card h1{font-size:28px;line-height:1.05;letter-spacing:-.035em;margin:0 0 8px;color:#0f172a}
+.auth-card p{font-size:13px;color:#64748b;line-height:1.55;margin:0 0 18px}
+.auth-form{display:grid;gap:12px;margin-top:18px}
+.auth-form label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#334155}
+.auth-form input{width:100%;border:1px solid rgba(148,163,184,.24);background:rgba(255,255,255,.82);border-radius:16px;padding:13px 14px;font-size:14px;outline:none;transition:.16s ease;color:#0f172a}
+.auth-form input:focus{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.16)}
+.auth-error{font-size:12px;color:#dc2626;background:rgba(254,242,242,.78);border:1px solid rgba(248,113,113,.20);padding:10px 12px;border-radius:14px;display:none}.auth-error.show{display:block}
+.auth-foot{font-size:11px;color:#64748b;margin-top:14px;line-height:1.5}
+.auth-user-chip{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(148,163,184,.18);color:#334155;font-size:12px;font-weight:700;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.auth-user-chip i{font-size:14px;color:#2563eb}.auth-user-chip.hidden,#auth-logout-btn.hidden{display:none!important}
+body.auth-locked .app{filter:blur(8px);pointer-events:none;user-select:none}
+.db-toggle input[disabled]{opacity:.75;cursor:not-allowed}.db-toggle{font-weight:700}
+
 </style>
+
+
+<div class="auth-overlay" id="signam-auth-overlay">
+  <div class="auth-card">
+    <div class="auth-mark"><i class="ti ti-shield-lock"></i> SIGNAM Cloud</div>
+    <h1>Inicia sesión para operar SIGNAM</h1>
+    <p>La operación trabaja contra Firestore por defecto. Al cargar un Excel, SIGNAM sincroniza automáticamente la base y registra los cambios por usuario.</p>
+    <div class="auth-form">
+      <label>Correo
+        <input type="email" id="signam-login-email" autocomplete="username" placeholder="usuario@empresa.com">
+      </label>
+      <label>Contraseña
+        <input type="password" id="signam-login-password" autocomplete="current-password" placeholder="Contraseña" onkeydown="if(event.key==='Enter')signamLogin()">
+      </label>
+      <div class="auth-error" id="signam-auth-error"></div>
+      <button class="btn-primary" onclick="signamLogin()"><i class="ti ti-login-2"></i> Entrar</button>
+    </div>
+    <div class="auth-foot">Acceso controlado por Firebase Authentication y la colección <code>signam_users</code>. Si tu usuario no está autorizado, podrás iniciar sesión pero SIGNAM bloqueará el acceso.</div>
+  </div>
+</div>
 
 <div class="app">
 
@@ -434,6 +548,8 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
   <div class="header-actions">
     <button class="btn-ghost" id="density-toggle" onclick="toggleDensity()"><i class="ti ti-layout-list"></i> Vista compacta</button>
     <span id="version-label">Sin archivo cargado</span>
+    <span id="auth-user-chip" class="auth-user-chip hidden"><i class="ti ti-user-circle"></i><span id="auth-user-label"></span></span>
+    <button class="btn-outline hidden" id="auth-logout-btn" onclick="signamLogout()"><i class="ti ti-logout"></i> Salir</button>
     <label style="cursor:pointer">
       <span class="btn-outline"><i class="ti ti-upload"></i> Cargar Excel</span>
       <input type="file" id="file-input" accept=".xlsx" style="display:none">
@@ -454,10 +570,8 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
   <button class="tab" onclick="switchTab('testigos')"><i class="ti ti-camera-check"></i> Control de Testigos <span id="badge-testigos" class="badge b-warning hidden" style="margin-left:2px"></span></button>
   <button class="tab" onclick="switchTab('admira-maestro')"><i class="ti ti-database"></i> Maestro Admira</button>
   <button class="tab" onclick="switchTab('admira-export')"><i class="ti ti-file-type-csv"></i> CSV Admira <span id="badge-admira-export" class="badge b-info hidden" style="margin-left:2px"></span></button>
-  <button class="tab" onclick="switchTab('base-datos')"><i class="ti ti-cloud-database"></i> Base de Datos <span id="badge-db" class="badge b-info hidden" style="margin-left:2px"></span></button>
-  <button class="tab" onclick="switchTab('cambios')"><i class="ti ti-git-compare"></i> Cambios <span id="badge-cambios" class="badge b-warning hidden" style="margin-left:2px"></span></button>
-  <button class="tab" onclick="switchTab('historial')"><i class="ti ti-history"></i> Historial</button>
   <button class="tab" onclick="switchTab('retrasos')"><i class="ti ti-alert-triangle"></i> Retrasos</button>
+  <button class="tab" onclick="switchTab('avanzado')"><i class="ti ti-settings-2"></i> Avanzado <span id="badge-cambios" class="badge b-warning hidden" style="margin-left:2px"></span></button>
 </div>
 
 <div id="tab-dashboard" class="section active">
@@ -485,25 +599,11 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
         <option value="corregida">Fecha corregida</option>
       </select>
       <input type="text" id="search-dash" placeholder="Buscar campaña..." style="min-width:180px" oninput="renderDashboard()">
-    </div>
-    <div class="hero-grid">
-      <div class="hero-panel">
-        <div class="hero-kicker">Workspace</div>
-        <div id="hero-sync-pill" class="sync-pill"><i class="ti ti-sparkles"></i> Vista lista para operar</div>
-        <h2>Centro operativo más limpio, con foco en acción.</h2>
-        <p id="hero-summary-text">Cargaremos una síntesis automática de campañas activas, testigos y alertas para que no tengas que leer todo de golpe.</p>
-        <div class="hero-actions">
-          <button class="btn-ghost" onclick="switchTab('testigos')"><i class="ti ti-camera-check"></i> Revisar testigos</button>
-          <button class="btn-ghost" onclick="switchTab('admira-export')"><i class="ti ti-file-type-csv"></i> Ir a CSV Admira</button>
-          <button class="btn-ghost" onclick="switchTab('cambios')"><i class="ti ti-git-compare"></i> Ver cambios</button>
-        </div>
-      </div>
-      <div class="hero-side">
-        <div class="focus-title">Necesita atención</div>
-        <div id="focus-list" class="focus-list"></div>
-      </div>
+      <button class="btn-outline dash-sync-btn" onclick="signamDbSyncIncremental()"><i class="ti ti-cloud-upload"></i> Sync ahora</button>
+      <span id="db-sync-mini-status" class="sync-mini-status">BD pendiente</span>
     </div>
     <div class="cards-grid" id="metrics-grid"></div>
+    <div id="dashboard-visual-grid" class="dashboard-visual-grid"></div>
     <div id="dash-testigos-ending-detail" class="hidden" style="margin-bottom:16px"></div>
     <div class="dash-split" id="dash-executive">
       <div class="dash-panel">
@@ -621,6 +721,11 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
 </div>
 
 <div id="tab-cambios" class="section">
+  <div class="advanced-nav-wrap"><div class="inner-tabs advanced-tabs" aria-label="Módulos avanzados">
+    <button class="inner-tab" id="advanced-subtab-base-datos" onclick="switchTab('base-datos')"><i class="ti ti-cloud-database"></i> Base de Datos</button>
+    <button class="inner-tab" id="advanced-subtab-cambios" onclick="switchTab('cambios')"><i class="ti ti-git-compare"></i> Cambios</button>
+    <button class="inner-tab" id="advanced-subtab-historial" onclick="switchTab('historial')"><i class="ti ti-history"></i> Historial</button>
+  </div></div>
   <div class="section-lead"><div><p class="eyebrow">Histórico</p><h3>Cambios detectados</h3><p>Compara cargas y enfócate solo en lo que realmente cambió. Menos ruido, más acción.</p></div></div>
   <div id="no-cambios" class="empty-state">
     <i class="ti ti-git-compare" aria-hidden="true"></i>
@@ -635,6 +740,11 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
 </div>
 
 <div id="tab-historial" class="section">
+  <div class="advanced-nav-wrap"><div class="inner-tabs advanced-tabs" aria-label="Módulos avanzados">
+    <button class="inner-tab" id="advanced-subtab-base-datos" onclick="switchTab('base-datos')"><i class="ti ti-cloud-database"></i> Base de Datos</button>
+    <button class="inner-tab" id="advanced-subtab-cambios" onclick="switchTab('cambios')"><i class="ti ti-git-compare"></i> Cambios</button>
+    <button class="inner-tab" id="advanced-subtab-historial" onclick="switchTab('historial')"><i class="ti ti-history"></i> Historial</button>
+  </div></div>
   <div class="section-lead"><div><p class="eyebrow">Histórico</p><h3>Historial</h3><p>Recupera versiones anteriores y mantén contexto sin depender del archivo del día.</p></div></div>
   <p style="font-size:12px;color:var(--gray-400);margin-bottom:16px">Cada versión cargada se guarda localmente con fecha y hora como evidencia.</p>
   <div id="version-list"></div>
@@ -812,11 +922,16 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
 
 
 <div id="tab-base-datos" class="section">
+  <div class="advanced-nav-wrap"><div class="inner-tabs advanced-tabs" aria-label="Módulos avanzados">
+    <button class="inner-tab" id="advanced-subtab-base-datos" onclick="switchTab('base-datos')"><i class="ti ti-cloud-database"></i> Base de Datos</button>
+    <button class="inner-tab" id="advanced-subtab-cambios" onclick="switchTab('cambios')"><i class="ti ti-git-compare"></i> Cambios</button>
+    <button class="inner-tab" id="advanced-subtab-historial" onclick="switchTab('historial')"><i class="ti ti-history"></i> Historial</button>
+  </div></div>
   <div class="section-lead">
     <div>
       <p class="eyebrow">Base de datos</p>
       <h3>Sincronización Firebase / Firestore</h3>
-      <p>Maqueta funcional para conectar SIGNAM a Firestore, conservar trazabilidad y preparar la sincronización incremental: nuevas, modificadas, sin cambios y no incluidas.</p>
+      <p>SIGNAM trabaja conectado a Firestore por defecto, con login de usuarios y auto-sync obligatorio al cargar Excel: nuevas, modificadas, sin cambios y no incluidas.</p>
     </div>
   </div>
 
@@ -850,6 +965,7 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
         <button class="btn-primary" onclick="signamDbConnect()"><i class="ti ti-plug-connected"></i> Conectar / Reconectar</button>
         <button class="btn-outline" onclick="signamDbToggleAdvancedConfig()"><i class="ti ti-settings"></i> Configuración avanzada</button>
         <button class="btn-outline" onclick="signamDbRenderPanel()"><i class="ti ti-refresh"></i> Actualizar estado</button>
+        <label class="db-toggle"><input type="checkbox" id="db-autosync-toggle" checked disabled> Auto-sync obligatorio al cargar Excel</label>
       </div>
     </div>
     <div id="firebase-advanced-config" class="hidden" style="margin-top:14px">
@@ -869,6 +985,7 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
     <button class="btn-outline" onclick="signamDbLoadSnapshot()"><i class="ti ti-cloud-download"></i> Restaurar snapshot nube</button>
     <button class="btn-outline" onclick="signamDbPushAdmiraMaster()"><i class="ti ti-database-export"></i> Subir Maestro Admira</button>
     <button class="btn-outline" onclick="signamDbPushTestigos()"><i class="ti ti-camera-up"></i> Subir testigos</button>
+    <button class="btn-outline" onclick="signamDbExportSyncLog()"><i class="ti ti-file-download"></i> Descargar log sync</button>
   </div>
 
   <div class="cards-grid" id="db-metrics"></div>
@@ -877,7 +994,7 @@ table tbody tr:hover td{background:rgba(248,250,252,.75)}
   <div id="db-sync-alerts"></div>
   <div class="table-wrap scroll-table">
     <table>
-      <thead><tr><th>Tipo</th><th>Campaña</th><th>Tienda</th><th>Soporte</th><th>Detalle</th><th>Hash anterior</th><th>Hash nuevo</th></tr></thead>
+      <thead><tr><th>Tipo</th><th>Campaña</th><th>Tienda</th><th>Soporte</th><th>Cambios detectados</th><th>Antes</th><th>Después</th></tr></thead>
       <tbody id="db-sync-tbody"></tbody>
     </table>
   </div>
@@ -905,6 +1022,7 @@ let maestro={},detalleRows=[],versions=[],retrasoLog=[],duplicadosActuales=[];
 let testigosDB={},testigosRegistry={};
 let admiraMaster=[],admiraMasterIssues=[],admiraPreviewAll=[],admiraPreview=[],admiraIncidents=[],admiraFilteredIncidents=[],admiraSelectedCampaigns=new Set(),admiraVisibleCampaignUids=new Set();
 let signamFirebaseApp=null,signamFirestore=null,signamFirebaseAuth=null,signamDbLastSync=null,signamDbLastChanges=[];
+let signamCurrentUser=null,signamCurrentProfile=null,signamAuthListenerReady=false;
 try{admiraMaster=JSON.parse(localStorage.getItem('signam_admira_master_v1')||'[]');}catch(e){admiraMaster=[];}
 try{versions=JSON.parse(localStorage.getItem('lv_v86_vcgpt')||localStorage.getItem('lv_v6')||'[]');}catch(e){}
 try{retrasoLog=JSON.parse(localStorage.getItem('lv_ret86_vcgpt')||localStorage.getItem('lv_ret6')||'[]');}catch(e){}
@@ -1173,15 +1291,24 @@ function parseExcel(data){
 }
 
 function switchTab(name){
-  const names=['dashboard','campanas','detalle','ruta','testigos','admira-maestro','admira-export','base-datos','cambios','historial','retrasos'];
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===name));
+  const mainNames=['dashboard','campanas','detalle','ruta','testigos','admira-maestro','admira-export','retrasos','avanzado'];
+  const advancedNames=['base-datos','cambios','historial'];
+  let target=name;
+  let mainActive=name;
+  if(name==='avanzado'){target='base-datos';mainActive='avanzado';}
+  if(advancedNames.includes(name)) mainActive='avanzado';
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',mainNames[i]===mainActive));
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if(name==='ruta')renderRuta();
-  if(name==='testigos')renderTestigos();
-  if(name==='admira-maestro')renderAdmiraMaster();
-  if(name==='admira-export')renderAdmiraExport();
-  if(name==='base-datos')signamDbRenderPanel();
+  const targetEl=document.getElementById('tab-'+target);
+  if(targetEl)targetEl.classList.add('active');
+  document.querySelectorAll('.advanced-tabs .inner-tab').forEach(btn=>btn.classList.remove('active'));
+  const advBtn=document.getElementById('advanced-subtab-'+target);
+  if(advBtn)advBtn.classList.add('active');
+  if(target==='ruta')renderRuta();
+  if(target==='testigos')renderTestigos();
+  if(target==='admira-maestro')renderAdmiraMaster();
+  if(target==='admira-export')renderAdmiraExport();
+  if(target==='base-datos')signamDbRenderPanel();
 }
 
 function filterList(list,mesId,tipoId,statusId){
@@ -1299,6 +1426,68 @@ function renderExecutiveDashboard(all){
   }
 }
 
+
+function dashboardMiniBar(label,value,max,cls=''){
+  const pct=max?Math.max(0,Math.min(100,Math.round((value/max)*100))):0;
+  return `<div class="mini-bar"><div class="mini-bar-head"><span>${label}</span><span>${value}</span></div><div class="mini-bar-track"><div class="mini-bar-fill ${cls}" style="width:${pct}%"></div></div></div>`;
+}
+function renderDashboardGlassPanels(campaigns,tgDash,stats={}){
+  const wrap=document.getElementById('dashboard-visual-grid');
+  if(!wrap) return;
+  const providerGroups=(tgDash.groups||[]);
+  const shortPeriod=providerGroups.filter(g=>g.shortPeriod).length;
+  const min10=providerGroups.filter(g=>g.min10Alert).length;
+  const overdue=providerGroups.filter(g=>g.closeOverdue).length;
+  const endingSoon=providerGroups.filter(g=>g.endingSoon).sort((a,b)=>(a.daysLeft??999)-(b.daysLeft??999));
+  const provider=(campaigns||[]).filter(c=>tipoBucket(c.tipo)==='Proveedor').length;
+  const institucional=(campaigns||[]).filter(c=>tipoBucket(c.tipo)==='Institucional').length;
+  const maxBase=Math.max(provider,institucional,stats.sinLink||0,stats.retrasadas||0,stats.atiempo||0,1);
+  const priorities=[
+    {cls: shortPeriod?'warning':'success', label:'Periodo corto para testigos', sub:'Campañas de 6 días naturales o menos.', count:shortPeriod},
+    {cls: min10?'danger':'success', label:'Avance menor al 10%', sub:'Proveedor ya iniciadas con avance mínimo pendiente.', count:min10},
+    {cls: endingSoon.length?'warning':'success', label:'Por terminar ≤ 4 días', sub:'Campañas en vigencia que requieren seguimiento cercano.', count:endingSoon.length},
+    {cls: overdue?'danger':'success', label:'Plazo final vencido', sub:'Campañas cerradas sin 100% de testigos tras 3 días.', count:overdue}
+  ];
+  wrap.innerHTML=`
+    <div class="glass-panel">
+      <h3 class="glass-title">Prioridades operativas</h3>
+      <div class="priority-stack">
+        ${priorities.map(p=>`<div class="priority-card ${p.cls}"><div><strong>${p.label}</strong><span>${p.sub}</span></div><div class="count">${p.count}</div></div>`).join('')}
+      </div>
+    </div>
+    <div class="glass-grid-2">
+      <div class="glass-panel">
+        <h3 class="glass-title">Avance de testigos</h3>
+        <div class="donut-wrap">
+          <div style="position:relative">
+            <div class="donut" style="--pct:${tgDash.percent||0}"></div>
+            <div class="donut-center"><div class="big">${tgDash.percent||0}%</div><div class="small">avance</div></div>
+          </div>
+          <div class="progress-legend">
+            <div class="progress-chip"><strong>${tgDash.taken||0} testigos tomados</strong><span>De un total requerido de ${tgDash.required||0} bajo los filtros activos.</span></div>
+            <div class="progress-chip"><strong>${providerGroups.length} campañas proveedor</strong><span>${tgDash.alertCampaigns||0} con alertas operativas de testigos.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-panel">
+        <h3 class="glass-title">Lectura rápida del mes</h3>
+        <div class="mini-bars">
+          ${dashboardMiniBar('Proveedor', provider, maxBase)}
+          ${dashboardMiniBar('Institucional', institucional, maxBase)}
+          ${dashboardMiniBar('Creatividades a tiempo', stats.atiempo||0, maxBase)}
+          ${dashboardMiniBar('Sin link', stats.sinLink||0, maxBase, 'danger')}
+          ${dashboardMiniBar('Creatividades retrasadas', stats.retrasadas||0, maxBase, 'warn')}
+        </div>
+      </div>
+    </div>
+    <div class="glass-panel" style="grid-column:1 / -1">
+      <h3 class="glass-title">Campañas por terminar</h3>
+      <div class="ending-stack">
+        ${endingSoon.length ? endingSoon.slice(0,6).map(g=>`<div class="ending-card"><div><strong>${g.campana}</strong><span>Fin ${fmt(g.ff)} · ${g.required} testigos requeridos · ${g.taken} tomados.</span></div><div class="count">${g.daysLeft}</div></div>`).join('') : `<div class="ending-card"><div><strong>Sin campañas críticas bajo los filtros actuales</strong><span>No hay campañas proveedor en vigencia que terminen en 4 días naturales o menos.</span></div><div class="count">0</div></div>`}
+      </div>
+    </div>`;
+}
+
 function renderDashboard(){
   const hoy=today();
   const searchDash=(document.getElementById('search-dash')?document.getElementById('search-dash').value||'':'').toLowerCase();
@@ -1318,22 +1507,17 @@ function renderDashboard(){
   let allDashStatus=filterList(Object.values(maestro),'dash-mes','dash-tipo','dash-status');
   if(searchDash)allDashStatus=allDashStatus.filter(c=>c.campana.toLowerCase().includes(searchDash));
   const tgDash=testigosDashboardSummary(allDashStatus);
-  renderDashboardFocus(allDashStatus, tgDash, sinLink, retrasadas);
+  renderDashboardGlassPanels(allDashStatus, tgDash, {sinLink,retrasadas,atiempo,corregidas});
 
   document.getElementById('metrics-grid').innerHTML=`
-    <div class="metric-card"><div class="label">Total campañas</div><div class="value">${all.length}</div></div>
-    <div class="metric-card"><div class="label">Proveedor ${mesScope}</div><div class="value">${proveedorMes}</div></div>
-    <div class="metric-card"><div class="label">Institucional ${mesScope}</div><div class="value">${institucionalMes}</div></div>
-    <div class="metric-card info"><div class="label">Activas hoy</div><div class="value">${activas.length}</div></div>
-    <div class="metric-card danger"><div class="label">Sin link</div><div class="value">${sinLink}</div></div>
-    <div class="metric-card warning"><div class="label">Creatividades retrasadas</div><div class="value">${retrasadas}</div></div>
-    <div class="metric-card success"><div class="label">Creatividades a tiempo</div><div class="value">${atiempo}</div></div>
-    <div class="metric-card info"><div class="label">Testigos requeridos</div><div class="value">${tgDash.required}</div></div>
-    <div class="metric-card success"><div class="label">Avance testigos</div><div class="value">${tgDash.percent}%</div></div>
-    <div class="metric-card warning" onclick="toggleTestigosEndingDetail()" style="cursor:pointer" title="Click para ver detalle"><div class="label">Campañas por terminar ≤4 días</div><div class="value">${tgDash.endingSoon.length}</div></div>
-    <div class="metric-card danger"><div class="label">Alertas testigos</div><div class="value">${tgDash.alertCampaigns}</div></div>
-    ${corregidas?`<div class="metric-card" style="border-top:3px solid #6D28D9"><div class="label" style="color:#6D28D9">Fecha corregida</div><div class="value" style="color:#6D28D9;font-size:28px;font-weight:700">${corregidas}</div></div>`:''}
+    <div class="metric-card dash-kpi blue"><div class="kpi-top"><div class="kpi-label">Activas hoy</div><div class="kpi-icon"><i class="ti ti-player-play"></i></div></div><div><div class="kpi-value">${activas.length}</div><div class="kpi-sub">Campañas en vigencia</div></div></div>
+    <div class="metric-card dash-kpi"><div class="kpi-top"><div class="kpi-label">Total campañas</div><div class="kpi-icon"><i class="ti ti-layout-grid"></i></div></div><div><div class="kpi-value">${all.length}</div><div class="kpi-sub">Bajo filtros actuales</div></div></div>
+    <div class="metric-card dash-kpi cyan"><div class="kpi-top"><div class="kpi-label">Testigos pendientes</div><div class="kpi-icon"><i class="ti ti-camera-exclamation"></i></div></div><div><div class="kpi-value">${Math.max((tgDash.required||0)-(tgDash.taken||0),0)}</div><div class="kpi-sub">${tgDash.taken||0}/${tgDash.required||0} tomados</div></div></div>
+    <div class="metric-card dash-kpi green"><div class="kpi-top"><div class="kpi-label">Avance testigos</div><div class="kpi-icon"><i class="ti ti-chart-donut"></i></div></div><div><div class="kpi-value">${tgDash.percent}%</div><div class="kpi-sub">Solo campañas Proveedor</div></div></div>
+    <div class="metric-card dash-kpi amber" onclick="toggleTestigosEndingDetail()" style="cursor:pointer" title="Click para ver detalle"><div class="kpi-top"><div class="kpi-label">Terminan ≤4 días</div><div class="kpi-icon"><i class="ti ti-hourglass-high"></i></div></div><div><div class="kpi-value">${tgDash.endingSoon.length}</div><div class="kpi-sub">Click para detalle</div></div></div>
+    <div class="metric-card dash-kpi red"><div class="kpi-top"><div class="kpi-label">Alertas</div><div class="kpi-icon"><i class="ti ti-alert-triangle"></i></div></div><div><div class="kpi-value">${tgDash.alertCampaigns}</div><div class="kpi-sub">Testigos / operación</div></div></div>
   `;
+  signamDbRenderDashboardStatus();
   renderTestigosEndingDetail(tgDash.endingSoon,false);
 
   const estat=document.getElementById('dash-status').value;
@@ -1616,6 +1800,7 @@ function processFile(file){
         corr||dups?'⚠️':'✅'
       );
     }
+    signamDbMaybeAutoSyncAfterLoad(file.name);
   };
   reader.readAsArrayBuffer(file);
 }
@@ -3034,13 +3219,16 @@ const SIGNAM_FIREBASE_DEFAULT_CONFIG={
   appId:'1:806512509339:web:b5984c4e884f7ce4b6613e'
 };
 const SIGNAM_DB_LAST_SYNC_KEY='signam_db_last_sync_v1';
+const SIGNAM_DB_AUTOSYNC_KEY='signam_db_autosync_v1';
+const SIGNAM_DB_SCHEMA_VERSION=2;
 const SIGNAM_DB_COLLECTIONS={
   meta:'signam_meta',
   snapshots:'signam_snapshots',
   lineas:'signam_lineas',
   testigos:'signam_testigos',
   maestroAdmira:'signam_maestro_admira',
-  syncLogs:'signam_sync_logs'
+  syncLogs:'signam_sync_logs',
+  users:'signam_users'
 };
 function signamDbText(v){return v===null||v===undefined?'':String(v).trim();}
 function signamDbDate(v){
@@ -3108,23 +3296,96 @@ async function signamDbConnect(auto=false){
     const cfg=auto?signamDbLoadConfig():signamDbGetConfigFromUi();
     const currentProject=(firebase.apps&&firebase.apps.length)?firebase.app().options.projectId:null;
     if(firebase.apps.length&&currentProject&&currentProject!==cfg.projectId){
-      // En compat SDK no conviene mezclar proyectos en caliente. Se avisa para recargar.
       throw new Error(`Ya hay una app Firebase inicializada para ${currentProject}. Recarga la página para cambiar a ${cfg.projectId}.`);
     }
     if(!firebase.apps.length)signamFirebaseApp=firebase.initializeApp(cfg);else signamFirebaseApp=firebase.app();
     signamFirebaseAuth=firebase.auth();
+    await signamFirebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     signamFirestore=firebase.firestore();
-    if(!signamFirebaseAuth.currentUser)await signamFirebaseAuth.signInAnonymously();
-    if(!auto)showToast('Firebase conectado',`Proyecto: ${cfg.projectId}`,'✅');
+    if(!signamAuthListenerReady){
+      signamAuthListenerReady=true;
+      signamFirebaseAuth.onAuthStateChanged(signamHandleAuthState);
+    }
+    if(!auto)showToast('Firebase listo',`Proyecto: ${cfg.projectId}. Inicia sesión para operar.`,'✅');
     signamDbRenderPanel();
+    signamUpdateAuthUi();
   }catch(e){
     console.error(e);
     if(!auto)showToast('No se pudo conectar Firebase',e.message||String(e),'⚠️',7000);
     signamDbRenderPanel();
   }
 }
+
+function signamAuthError(msg=''){
+  const el=document.getElementById('signam-auth-error');
+  if(!el)return;
+  el.textContent=msg||'';
+  el.classList.toggle('show',!!msg);
+}
+function signamAuthLock(){document.body.classList.add('auth-locked');const ov=document.getElementById('signam-auth-overlay');if(ov)ov.classList.remove('hidden');}
+function signamAuthUnlock(){document.body.classList.remove('auth-locked');const ov=document.getElementById('signam-auth-overlay');if(ov)ov.classList.add('hidden');}
+function signamUpdateAuthUi(){
+  const chip=document.getElementById('auth-user-chip'), label=document.getElementById('auth-user-label'), out=document.getElementById('auth-logout-btn');
+  if(signamCurrentUser){
+    if(label)label.textContent=signamCurrentProfile?.name||signamCurrentUser.email||'Usuario';
+    if(chip)chip.classList.remove('hidden');
+    if(out)out.classList.remove('hidden');
+  }else{
+    if(chip)chip.classList.add('hidden');
+    if(out)out.classList.add('hidden');
+  }
+}
+async function signamLoadUserProfile(user){
+  if(!signamFirestore||!user)throw new Error('Usuario o Firestore no disponible.');
+  const ref=signamFirestore.collection(SIGNAM_DB_COLLECTIONS.users).doc(user.uid);
+  const snap=await ref.get();
+  if(!snap.exists)throw new Error('Usuario autenticado, pero no autorizado en signam_users. Pide al administrador que cree tu perfil.');
+  const profile=snap.data()||{};
+  if(profile.active!==true)throw new Error('Usuario desactivado para SIGNAM.');
+  return {...profile,uid:user.uid,email:user.email};
+}
+async function signamHandleAuthState(user){
+  try{
+    if(!user){signamCurrentUser=null;signamCurrentProfile=null;signamUpdateAuthUi();signamAuthLock();signamDbRenderDashboardStatus();return;}
+    signamCurrentUser=user;
+    signamCurrentProfile=await signamLoadUserProfile(user);
+    signamAuthError('');
+    signamAuthUnlock();
+    signamUpdateAuthUi();
+    showToast('Sesión iniciada',signamCurrentProfile?.name||user.email,'✅');
+    signamDbRenderPanel();
+    signamDbRenderDashboardStatus();
+  }catch(e){
+    console.error(e);
+    signamAuthError(e.message||String(e));
+    signamCurrentUser=null;signamCurrentProfile=null;
+    signamUpdateAuthUi();
+    signamAuthLock();
+    try{await signamFirebaseAuth.signOut();}catch(_e){}
+  }
+}
+async function signamLogin(){
+  try{
+    signamAuthError('');
+    if(!signamFirebaseAuth)await signamDbConnect(true);
+    const email=(document.getElementById('signam-login-email')?.value||'').trim();
+    const pass=(document.getElementById('signam-login-password')?.value||'').trim();
+    if(!email||!pass)throw new Error('Captura correo y contraseña.');
+    await signamFirebaseAuth.signInWithEmailAndPassword(email,pass);
+  }catch(e){
+    console.error(e);
+    const msg=(e.code==='auth/user-not-found'||e.code==='auth/wrong-password'||e.code==='auth/invalid-credential')?'Correo o contraseña incorrectos.':(e.message||String(e));
+    signamAuthError(msg);
+  }
+}
+async function signamLogout(){
+  try{await signamFirebaseAuth.signOut();showToast('Sesión cerrada','Vuelve a iniciar sesión para operar SIGNAM.','✅');}
+  catch(e){showToast('No se pudo cerrar sesión',e.message||String(e),'⚠️');}
+}
+
 function signamDbEnsure(){
-  if(!signamFirestore)throw new Error('Base no conectada. Entra a Base de Datos y conecta Firebase.');
+  if(!signamFirestore)throw new Error('Base no conectada.');
+  if(!signamCurrentUser||!signamCurrentProfile)throw new Error('Inicia sesión con un usuario autorizado para operar SIGNAM.');
   return signamFirestore;
 }
 function signamDbClearConfig(){
@@ -3133,6 +3394,60 @@ function signamDbClearConfig(){
   showToast('Configuración avanzada borrada','SIGNAM volverá a usar el proyecto integrado signam-produccion.','🧹');
   signamDbRenderPanel();
 }
+
+function signamDbIsAutoSync(){return true;} // Operación Cloud-first: auto-sync obligatorio
+function signamDbSetAutoSync(on){
+  localStorage.setItem(SIGNAM_DB_AUTOSYNC_KEY,'1');
+  const el=document.getElementById('db-autosync-toggle');if(el)el.checked=true;
+  showToast('Auto-sync obligatorio','SIGNAM sincroniza Firestore automáticamente al cargar Excel.','✅');
+  signamDbRenderPanel();
+}
+function signamDbMaybeAutoSyncAfterLoad(filename=''){
+  signamDbRenderDashboardStatus();
+  if(!signamDbIsAutoSync())return;
+  setTimeout(()=>{
+    if(!signamFirestore||!signamCurrentUser){showToast('Auto-sync pendiente','Inicia sesión con un usuario autorizado para sincronizar Firestore.','⚠️',6500);return;}
+    signamDbSyncIncremental({auto:true,filename});
+  },650);
+}
+const SIGNAM_DB_SYNC_FIELDS=[
+  ['campana','Campaña'],['tipo','Tipo'],['mes','Mes'],['pantalla','Soporte'],['numeroTienda','No. tienda'],['tienda','Tienda'],['fechaInicio','Inicio'],['fechaFin','Fin'],['link','Link'],['status','Estatus'],['origenTiendas','Origen tiendas'],['observacion','Observación']
+];
+function signamDbDiffRecord(oldData,newData){
+  const diffs=[];
+  SIGNAM_DB_SYNC_FIELDS.forEach(([field,label])=>{
+    const a=signamDbText(oldData&&oldData[field]);
+    const b=signamDbText(newData&&newData[field]);
+    if(a!==b)diffs.push({field,label,oldValue:a||'—',newValue:b||'—'});
+  });
+  return diffs;
+}
+function signamDbDiffHtml(diffs){
+  if(!diffs||!diffs.length)return 'Sin cambios contra base';
+  return `<div class="diff-mini">${diffs.slice(0,4).map(d=>`<span><b>${d.label}:</b> ${d.oldValue} → ${d.newValue}</span>`).join('')}${diffs.length>4?`<span>+${diffs.length-4} cambio(s) más</span>`:''}</div>`;
+}
+function signamDbRenderDashboardStatus(){
+  const el=document.getElementById('db-sync-mini-status');if(!el)return;
+  const last=signamDbLastSync;
+  el.classList.remove('ok','warn');
+  if(!signamFirestore){el.textContent='BD sin conexión';el.classList.add('warn');return;}
+  if(!last){el.textContent='BD conectada · sin sync';el.classList.add('warn');return;}
+  el.textContent=`BD: ${last.nuevas||0}+ · ${last.modificadas||0} mod · ${last.ausentes||0} fuera`;
+  el.classList.add((last.modificadas||last.ausentes)?'warn':'ok');
+}
+function signamDbBuildStableKey(base){
+  // V2: no incluye fechas para que un cambio de vigencia sea Modificada, no Nueva + No incluida.
+  return ['V2',base.campana,base.tipo,base.pantalla,base.numeroTienda].map(signamDbSafeId).join('__');
+}
+function signamDbExportSyncLog(){
+  const payload={exportedAt:new Date().toISOString(),lastSync:signamDbLastSync,changes:signamDbLastChanges||[]};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`SIGNAM_sync_log_${admiraYmd(new Date())}.json`;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
 function signamDbBuildLineRecords(){
   const records=[];
   (detalleRows||[]).forEach(r=>{
@@ -3145,17 +3460,20 @@ function signamDbBuildLineRecords(){
         numeroTienda:num,tienda,fechaInicio:signamDbDate(r.fi),fechaFin:signamDbDate(r.ff),
         link:r.link||'',status:getStatus(r),origenTiendas:r.origenTiendas||'',observacion:tiendaObservacion?tiendaObservacion(t,r.origenTiendas):''
       };
-      const key=[base.campana,base.fechaInicio,base.fechaFin,base.pantalla,base.numeroTienda].map(signamDbSafeId).join('__');
+      const key=signamDbBuildStableKey(base);
+      const legacyKey=[base.campana,base.fechaInicio,base.fechaFin,base.pantalla,base.numeroTienda].map(signamDbSafeId).join('__');
       const hash=signamDbHash(base);
-      records.push({...base,key,hash,updatedLocalAt:new Date().toISOString()});
+      records.push({...base,key,legacyKey,hash,schemaVersion:SIGNAM_DB_SCHEMA_VERSION,updatedLocalAt:new Date().toISOString(),updatedBy:signamCurrentUser?.email||'',updatedByUid:signamCurrentUser?.uid||''});
     });
   });
   return records;
 }
 function signamDbExportState(){
   return {
-    schemaVersion:1,
+    schemaVersion:SIGNAM_DB_SCHEMA_VERSION,
     exportedAt:new Date().toISOString(),
+    exportedBy:signamCurrentUser?.email||'',
+    exportedByUid:signamCurrentUser?.uid||'',
     versionLabel:document.getElementById('version-label')?.textContent||'',
     maestro:serializeM?serializeM(maestro):maestro,
     detalle:serializeD?serializeD(detalleRows):detalleRows,
@@ -3226,7 +3544,7 @@ async function signamDbPushTestigos(){
     signamDbRenderPanel();
   }catch(e){console.error(e);showToast('Error subiendo testigos',e.message||String(e),'⚠️',7000);}
 }
-async function signamDbSyncIncremental(){
+async function signamDbSyncIncremental(options={}){
   try{
     const db=signamDbEnsure();
     const records=signamDbBuildLineRecords();
@@ -3239,15 +3557,16 @@ async function signamDbSyncIncremental(){
       await Promise.all(chunk.map(async r=>{
         const ref=db.collection(SIGNAM_DB_COLLECTIONS.lineas).doc(r.key);
         const old=await ref.get();
-        let tipo='Sin cambios',detail='Sin cambios contra base';let oldHash='—';
+        let tipo='Sin cambios',detail='Sin cambios contra base',diffs=[];let oldHash='—';
         if(!old.exists){tipo='Nueva';detail='Línea agregada a base';nuevas++;}
         else{
           const d=old.data();oldHash=d.hash||'—';
-          if(d.hash!==r.hash){tipo='Modificada';detail='Cambió algún campo operativo';modificadas++;}
+          diffs=signamDbDiffRecord(d,r);
+          if(d.hash!==r.hash||diffs.length){tipo='Modificada';detail=diffs.length?diffs.map(x=>`${x.label}: ${x.oldValue} → ${x.newValue}`).join(' | '):'Cambió algún campo operativo';modificadas++;}
           else sinCambios++;
         }
-        await ref.set({...r,active:true,lastSeenLoadId:loadId,lastSeenAt:firebase.firestore.FieldValue.serverTimestamp(),createdAt:old.exists?(old.data().createdAt||null):firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
-        if(tipo!=='Sin cambios')changes.push({tipo,campana:r.campana,tienda:`${r.numeroTienda} ${r.tienda}`,soporte:r.pantalla,detail,oldHash,newHash:r.hash});
+        await ref.set({...r,active:true,statusDb:tipo==='Nueva'?'new':tipo==='Modificada'?'modified':'unchanged',diffs:diffs||[],lastSeenLoadId:loadId,lastSeenAt:firebase.firestore.FieldValue.serverTimestamp(),createdAt:old.exists?(old.data().createdAt||null):firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+        if(tipo!=='Sin cambios')changes.push({tipo,campana:r.campana,tienda:`${r.numeroTienda} ${r.tienda}`,soporte:r.pantalla,detail,diffs,oldValue:diffs&&diffs[0]?diffs[0].oldValue:'—',newValue:diffs&&diffs[0]?diffs[0].newValue:'—',oldHash,newHash:r.hash});
       }));
     }
     const activeSnap=await db.collection(SIGNAM_DB_COLLECTIONS.lineas).where('active','==',true).get();
@@ -3255,12 +3574,12 @@ async function signamDbSyncIncremental(){
     activeSnap.forEach(doc=>{
       if(!currentKeys.has(doc.id)){
         const d=doc.data();ausentes++;
-        changes.push({tipo:'No incluida',campana:d.campana||'',tienda:`${d.numeroTienda||''} ${d.tienda||''}`,soporte:d.pantalla||'',detail:'Existía en base pero no vino en esta carga',oldHash:d.hash||'—',newHash:'—'});
+        changes.push({tipo:'No incluida',campana:d.campana||'',tienda:`${d.numeroTienda||''} ${d.tienda||''}`,soporte:d.pantalla||'',detail:'Existía en base pero no vino en esta carga',diffs:[],oldValue:d.hash||'—',newValue:'—',oldHash:d.hash||'—',newHash:'—'});
         batch.update(doc.ref,{active:false,statusDb:'not_in_last_upload',lastMissingLoadId:loadId,lastMissingAt:firebase.firestore.FieldValue.serverTimestamp()});batchCount++;
       }
     });
     if(batchCount)await batch.commit();
-    const log={loadId,createdAt:firebase.firestore.FieldValue.serverTimestamp(),total:records.length,nuevas,modificadas,sinCambios,ausentes,filename:document.getElementById('version-label')?.textContent||'',changes:changes.slice(0,300)};
+    const log={loadId,schemaVersion:SIGNAM_DB_SCHEMA_VERSION,createdAt:firebase.firestore.FieldValue.serverTimestamp(),createdBy:signamCurrentUser?.email||'',createdByUid:signamCurrentUser?.uid||'',total:records.length,nuevas,modificadas,sinCambios,ausentes,filename:options.filename||document.getElementById('version-label')?.textContent||'',auto:!!options.auto,changes:changes.slice(0,300)};
     await db.collection(SIGNAM_DB_COLLECTIONS.syncLogs).doc(loadId).set(log);
     signamDbLastSync={loadId,total:records.length,nuevas,modificadas,sinCambios,ausentes,createdAt:new Date().toISOString()};
     signamDbLastChanges=changes;
@@ -3274,12 +3593,13 @@ async function signamDbSyncIncremental(){
 function signamDbRenderPanel(){
   const saved=localStorage.getItem(SIGNAM_DB_CONFIG_KEY)||'';
   const area=document.getElementById('firebase-config-json');if(area&&!area.value)area.value=saved;
+  const auto=document.getElementById('db-autosync-toggle');if(auto){auto.checked=true;auto.disabled=true;}
   try{const x=JSON.parse(localStorage.getItem(SIGNAM_DB_LAST_SYNC_KEY)||'{}');if(x.sync){signamDbLastSync=x.sync;signamDbLastChanges=x.changes||[];}}catch(e){}
   const status=document.getElementById('db-status-text');
   if(status){
     const cfg=signamDbLoadConfig();
     const source=localStorage.getItem(SIGNAM_DB_CONFIG_KEY)?'configuración avanzada':'configuración integrada';
-    status.innerHTML=signamFirestore?`<strong>Conectado</strong><br>Proyecto: ${cfg?.projectId||'—'}<br><span style="color:var(--gray-500);font-size:12px">${source}</span>`:`Pendiente conectar.<br><span style="color:var(--gray-500);font-size:12px">Proyecto: ${cfg?.projectId||'—'} · ${source}</span>`;
+    status.innerHTML=signamFirestore?`<strong>Conectado</strong><br>Proyecto: ${cfg?.projectId||'—'}<br>Usuario: ${signamCurrentUser?.email||'sin sesión'}<br><span style="color:var(--gray-500);font-size:12px">${source} · auto-sync obligatorio</span>`:`Pendiente conectar.<br><span style="color:var(--gray-500);font-size:12px">Proyecto: ${cfg?.projectId||'—'} · ${source}</span>`;
   }
   const local=document.getElementById('db-local-summary');
   if(local)local.innerHTML=`${Object.keys(maestro||{}).length} campañas · ${(detalleRows||[]).length} líneas operativas · ${(admiraMaster||[]).length} registros Admira`;
@@ -3296,10 +3616,12 @@ function signamDbRenderPanel(){
       <div class="metric-card danger"><div class="label">No incluidas</div><div class="value">${s.ausentes||0}</div></div>`;
   }
   const body=document.getElementById('db-sync-tbody');
-  if(body)body.innerHTML=signamDbLastChanges.length?signamDbLastChanges.map(c=>`<tr><td><span class="badge ${c.tipo==='Nueva'?'b-success':c.tipo==='Modificada'?'b-warning':c.tipo==='No incluida'?'b-danger':'b-gray'}">${c.tipo}</span></td><td class="td-name">${c.campana||'—'}</td><td>${c.tienda||'—'}</td><td>${c.soporte||'—'}</td><td>${c.detail||'—'}</td><td class="mono">${c.oldHash||'—'}</td><td class="mono">${c.newHash||'—'}</td></tr>`).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--gray-500);padding:2rem">Sin cambios sincronizados todavía.</td></tr>';
+  if(body)body.innerHTML=signamDbLastChanges.length?signamDbLastChanges.map(c=>`<tr><td><span class="badge ${c.tipo==='Nueva'?'b-success':c.tipo==='Modificada'?'b-warning':c.tipo==='No incluida'?'b-danger':'b-gray'}">${c.tipo}</span></td><td class="td-name">${c.campana||'—'}</td><td>${c.tienda||'—'}</td><td>${c.soporte||'—'}</td><td>${c.diffs&&c.diffs.length?signamDbDiffHtml(c.diffs):(c.detail||'—')}</td><td>${c.oldValue||c.oldHash||'—'}</td><td>${c.newValue||c.newHash||'—'}</td></tr>`).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--gray-500);padding:2rem">Sin cambios sincronizados todavía.</td></tr>';
   const count=document.getElementById('db-sync-count');if(count)count.textContent=signamDbLastChanges.length?`${signamDbLastChanges.length} cambios mostrados`:'Sin cambios para mostrar';
   const badge=document.getElementById('badge-db');if(badge){if(signamFirestore){badge.textContent='on';badge.classList.remove('hidden');}else badge.classList.add('hidden');}
+  signamDbRenderDashboardStatus();
 }
+
 
 function showToast(title, sub='', icon='✅', duration=4000){
   const t=document.getElementById('app-toast');
@@ -3313,6 +3635,7 @@ function showToast(title, sub='', icon='✅', duration=4000){
 
 
 initDensity();
+signamAuthLock();
 signamDbConnect(true);
 initTestigosView();
 document.getElementById('file-input').addEventListener('change',e=>{if(e.target.files[0])processFile(e.target.files[0]);});
